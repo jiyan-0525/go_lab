@@ -1,0 +1,45 @@
+# Azure DevOps CI/CD Pipeline for Go Lab Monorepo
+# Builds and pushes multi-stage Docker images to Docker Hub
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - go_server/**
+      - htmx_demo/**
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+# -------------------------------------------------------------
+# Task 1: Build & Push `go_server` -> jiyanwang/goserver
+# -------------------------------------------------------------
+- task: Docker@2
+  displayName: "Build and Push: goserver"
+  inputs:
+    containerRegistry: 'dockerhub-conn'
+    repository: 'jiyanwang/goserver'
+    command: 'buildAndPush'
+    dockerfile: 'go_server/Dockerfile'
+    buildContext: 'go_server'
+    tags: |
+      latest
+      $(Build.BuildId)
+
+# -------------------------------------------------------------
+# Task 2: Build & Push `htmx_demo` -> jiyanwang/htmx-dashboard
+# -------------------------------------------------------------
+- task: Docker@2
+  displayName: "Build and Push: htmx-dashboard"
+  inputs:
+    containerRegistry: 'dockerhub-conn'
+    repository: 'jiyanwang/htmx-dashboard'
+    command: 'buildAndPush'
+    dockerfile: 'htmx_demo/Dockerfile'
+    buildContext: 'htmx_demo'
+    tags: |
+      latest
+      $(Build.BuildId)
