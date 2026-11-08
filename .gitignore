@@ -1,0 +1,29 @@
+# Compiled binaries and executables
+goserver
+envcreat
+server
+test_server
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build cache
+.cache/
+
+# Environment files
+.env
+*.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
