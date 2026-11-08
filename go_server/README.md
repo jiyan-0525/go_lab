@@ -70,7 +70,14 @@ http://localhost:8010
 ```
 ## Publishing to Docker Hub
 
-Rebuild the Go binary:
+> **Note**: Both `jiyanwang/goserver` and `jiyanwang/htmx-dashboard` are now automatically built and published via the root **Azure DevOps CI/CD pipeline** whenever code is pushed to `main`!
+
+```bash
+docker pull jiyanwang/goserver:latest
+docker run -p 8010:8010 jiyanwang/goserver:latest
+```
+
+### Manual Publishing (Optional)
 
 ```
 GOOS=linux GOARCH=amd64 go build

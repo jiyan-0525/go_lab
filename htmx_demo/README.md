@@ -36,7 +36,24 @@ Visit `http://localhost:8010` (or your custom port) in your browser.
 
 ---
 
-### Option B: Run in Docker (Cloud-Native Container)
+### Option B: Pull & Run directly from Docker Hub (Automated via Azure DevOps)
+
+This image is automatically built and published by the root Azure DevOps CI/CD pipeline:
+
+```bash
+# Pull the latest image from Docker Hub
+docker pull jiyanwang/htmx-dashboard:latest
+
+# Run the container
+docker run -d -p 8010:8010 --name htmx-app jiyanwang/htmx-dashboard:latest
+
+# Or run with dynamic custom port (e.g. 9000):
+docker run -d -e PORT=9000 -p 9000:9000 --name htmx-app jiyanwang/htmx-dashboard:latest
+```
+
+---
+
+### Option C: Build and Run Docker Locally
 
 We use a **Multi-Stage Dockerfile** to produce an ultra-lightweight (~12MB) production image:
 

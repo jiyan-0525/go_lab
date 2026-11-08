@@ -92,26 +92,45 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](file:///
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start & Docker Hub Deployment
 
-### 1. Run the Reactive HTMX Dashboard
+Both microservices are automatically built, tested, and published to **Docker Hub** via the Azure DevOps CI/CD pipeline.
+
+### Option 1: Direct Cloud Deployment from Docker Hub
+
+Run the pre-built, production-ready images anywhere with Docker:
+
+#### 🐹 1. Run HTMX Reactive Dashboard
 ```bash
-cd htmx_demo
+# Pull the latest image
+docker pull jiyanwang/htmx-dashboard:latest
 
-# Run locally:
-go run main.go
-
-# Or run with custom dynamic port:
-PORT=9000 go run main.go
-```
-Visit `http://localhost:8010` (or `http://localhost:9000`).
-
-### 2. Pull & Run from Docker Hub
-Once Azure DevOps finishes pushing the images:
-```bash
-# Run the HTMX Dashboard container
+# Run the container (accessible on http://localhost:8010)
 docker run -d -p 8010:8010 --name htmx-dashboard jiyanwang/htmx-dashboard:latest
 
-# Run the Go Server container
+# Or run with dynamic custom port:
+docker run -d -e PORT=8999 -p 8999:8999 --name htmx-dashboard jiyanwang/htmx-dashboard:latest
+```
+
+#### 🌐 2. Run Go HTTP Server
+```bash
+# Pull the latest image
+docker pull jiyanwang/goserver:latest
+
+# Run the container (accessible on http://localhost:8020)
 docker run -d -p 8020:8010 --name goserver jiyanwang/goserver:latest
+```
+
+---
+
+### Option 2: Local Development
+
+```bash
+# 1. Run HTMX Dashboard locally:
+cd htmx_demo
+go run main.go
+
+# 2. Run Go Server locally:
+cd ../go_server
+go run main.go
 ```
