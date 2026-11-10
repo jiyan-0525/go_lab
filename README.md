@@ -19,11 +19,12 @@ go_lab/
 ├── .gitignore              # 🛡️ Global binary and build artifact filters
 ├── README.md               # 📖 Repository documentation
 │
-├── htmx_demo/              # 🐹 Reactive Web Application
-│   ├── main.go             # Go server with dynamic PORT & inline HTMX template
-│   ├── Dockerfile          # Multi-stage production build (~12MB image)
-│   ├── go.mod              # Go module definition
-│   └── README.md           # HTMX interactive guide
+├── go_exercises/           # 📚 Core Language Exercises & Algorithms
+│   ├── for_loops.go        # Iterations, control flow & range slices
+│   ├── slices.go           # Slice manipulation & dynamic arrays
+│   ├── maps.go             # Key-value dictionary operations
+│   ├── pointers.go         # Memory addresses & pointer semantics
+│   └── ...
 │
 ├── go_server/              # 🌐 Backend Microservice & Docker Practices
 │   ├── main.go             # Standard library HTTP server
@@ -32,19 +33,18 @@ go_lab/
 │   ├── README.md           # Server & containerization notes
 │   └── envcreat/           # 12-Factor dynamic environment config sub-lab
 │
-└── go_exercises/           # 📚 Core Language Exercises & Algorithms
-    ├── for_loops.go        # Iterations, control flow & range slices
-    ├── slices.go           # Slice manipulation & dynamic arrays
-    ├── maps.go             # Key-value dictionary operations
-    ├── pointers.go         # Memory addresses & pointer semantics
-    └── ...
+└── htmx_demo/              # 🐹 Reactive Web Application
+    ├── main.go             # Go server with dynamic PORT & inline HTMX template
+    ├── Dockerfile          # Multi-stage production build (~12MB image)
+    ├── go.mod              # Go module definition
+    └── README.md           # HTMX interactive guide
 ```
 
 ---
 
 ## 🔄 Automated CI/CD Pipeline (Azure DevOps)
 
-The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](file:///home/jiyan/go/go_lab/azure-pipelines.yml)) to achieve fully automated continuous integration and continuous delivery (CI/CD) to **Docker Hub**.
+The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./azure-pipelines.yml)) to achieve fully automated continuous integration and continuous delivery (CI/CD) to **Docker Hub**.
 
 ### Pipeline Workflow
 
@@ -86,9 +86,9 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](file:///
 
 | Module | Purpose | Key Technologies | Docker Hub Image |
 |---|---|---|---|
-| [**`htmx_demo/`**](file:///home/jiyan/go/go_lab/htmx_demo) | Modern single-page interactive UI without Node.js or frontend bundlers | Go `net/http`, HTMX, Responsive CSS | `jiyanwang/htmx-dashboard` |
-| [**`go_server/`**](file:///home/jiyan/go/go_lab/go_server) | Microservice HTTP server & cloud-native dynamic configuration | Go, Docker, 12-Factor App (`PORT`) | `jiyanwang/goserver` |
-| [**`go_exercises/`**](file:///home/jiyan/go/go_lab/go_exercises) | Core language syntax, data structures, and algorithms | Control Flow, Slices, Maps, Pointers | *N/A (Library Code)* |
+| [**`go_exercises/`**](./go_exercises) | Core language syntax, data structures, and algorithms | Variables, Control Flow, Functions, Slices, Maps, Pointers, Runes | *N/A (Library Code)* |
+| [**`go_server/`**](./go_server) | Microservice HTTP server & cloud-native dynamic configuration | Go, Docker, 12-Factor App (`PORT`) | `jiyanwang/goserver` |
+| [**`htmx_demo/`**](./htmx_demo) | Modern single-page interactive UI without Node.js or frontend bundlers | Go `net/http`, HTMX, Responsive CSS | `jiyanwang/htmx-dashboard` |
 
 ---
 
