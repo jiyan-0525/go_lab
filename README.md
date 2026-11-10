@@ -20,11 +20,18 @@ go_lab/
 ├── README.md               # 📖 Repository documentation
 │
 ├── go_exercises/           # 📚 Core Language Exercises & Algorithms
-│   ├── for_loops.go        # Iterations, control flow & range slices
-│   ├── slices.go           # Slice manipulation & dynamic arrays
-│   ├── maps.go             # Key-value dictionary operations
-│   ├── pointers.go         # Memory addresses & pointer semantics
-│   └── ...
+│   ├── go_by_Example/      # Go by Example fundamentals
+│   │   ├── hello.go        # Hello, world entry point
+│   │   ├── variables.go    # Variables, types & string indexing
+│   │   ├── control.go      # if/else control flow
+│   │   ├── for_loops.go    # Iterations, range over slices & maps
+│   │   ├── switch.go       # switch statements & custom types
+│   │   ├── funtions.go     # Functions, named returns & multiple returns
+│   │   ├── slices.go       # Arrays, slices, append & sub-slicing
+│   │   ├── maps.go         # Key-value dictionary operations
+│   │   ├── pointers.go     # Memory addresses & pointer semantics
+│   │   └── rune.go         # Runes & Unicode string handling
+│   └── go_by_web/          # Web, cache, ORM exercises (planned)
 │
 ├── go_server/              # 🌐 Backend Microservice & Docker Practices
 │   ├── main.go             # Standard library HTTP server
