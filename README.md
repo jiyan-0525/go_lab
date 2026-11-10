@@ -15,6 +15,7 @@ This repository is organized as a structured **Monorepo**:
 
 ```text
 go_lab/
+├── azure-pipelines.yml     # 🚀 Root Azure DevOps CI/CD pipeline (Multi-job)
 ├── .gitignore              # 🛡️ Global binary and build artifact filters
 ├── README.md               # 📖 Repository documentation
 │
@@ -25,27 +26,25 @@ go_lab/
 │   ├── pointers.go         # Memory addresses & pointer semantics
 │   └── ...
 │
-└── services/               # 🐳 Containerized Microservices
-    ├── azure-pipelines.yml # 🚀 Azure DevOps CI/CD pipeline (Multi-job)
-    ├── go_server/          # 🌐 Backend Microservice & Docker Practices
-    │   ├── main.go         # Standard library HTTP server
-    │   ├── Dockerfile      # Self-compiling multi-stage Dockerfile
-    │   ├── go.mod          # Go module definition
-    │   ├── README.md       # Server & containerization notes
-    │   └── envcreat/       # 12-Factor dynamic environment config sub-lab
-    │
-    └── htmx_demo/          # 🐹 Reactive Web Application
-        ├── main.go         # Go server with dynamic PORT & inline HTMX template
-        ├── Dockerfile      # Multi-stage production build (~12MB image)
-        ├── go.mod          # Go module definition
-        └── README.md       # HTMX interactive guide
+├── go_server/              # 🌐 Backend Microservice & Docker Practices
+│   ├── main.go             # Standard library HTTP server
+│   ├── Dockerfile          # Self-compiling multi-stage Dockerfile
+│   ├── go.mod              # Go module definition
+│   ├── README.md           # Server & containerization notes
+│   └── envcreat/           # 12-Factor dynamic environment config sub-lab
+│
+└── htmx_demo/              # 🐹 Reactive Web Application
+    ├── main.go             # Go server with dynamic PORT & inline HTMX template
+    ├── Dockerfile          # Multi-stage production build (~12MB image)
+    ├── go.mod              # Go module definition
+    └── README.md           # HTMX interactive guide
 ```
 
 ---
 
 ## 🔄 Automated CI/CD Pipeline (Azure DevOps)
 
-The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./services/azure-pipelines.yml)) to achieve fully automated continuous integration and continuous delivery (CI/CD) to **Docker Hub**.
+The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./azure-pipelines.yml)) to achieve fully automated continuous integration and continuous delivery (CI/CD) to **Docker Hub**.
 
 ### Pipeline Workflow
 
@@ -57,7 +56,7 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./servic
 │             Azure DevOps CI/CD Pipeline                │
 │                                                        │
 │  Intelligent Path Filtering:                           │
-│  - Triggers only when `services/go_server/**` or `services/htmx_demo/**` │
+│  - Triggers only when `go_server/**` or `htmx_demo/**` │
 │    files change.                                       │
 └───────────┬────────────────────────────────┬───────────┘
             │                                │
@@ -88,8 +87,8 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./servic
 | Module | Purpose | Key Technologies | Docker Hub Image |
 |---|---|---|---|
 | [**`go_exercises/`**](./go_exercises) | Core language syntax, data structures, and algorithms | Variables, Control Flow, Functions, Slices, Maps, Pointers, Runes | *N/A (Library Code)* |
-| [**`services/go_server/`**](./services/go_server) | Microservice HTTP server & cloud-native dynamic configuration | Go, Docker, 12-Factor App (`PORT`) | `jiyanwang/goserver` |
-| [**`services/htmx_demo/`**](./services/htmx_demo) | Modern single-page interactive UI without Node.js or frontend bundlers | Go `net/http`, HTMX, Responsive CSS | `jiyanwang/htmx-dashboard` |
+| [**`go_server/`**](./go_server) | Microservice HTTP server & cloud-native dynamic configuration | Go, Docker, 12-Factor App (`PORT`) | `jiyanwang/goserver` |
+| [**`htmx_demo/`**](./htmx_demo) | Modern single-page interactive UI without Node.js or frontend bundlers | Go `net/http`, HTMX, Responsive CSS | `jiyanwang/htmx-dashboard` |
 
 ---
 
@@ -128,10 +127,10 @@ docker run -d -p 8020:8010 --name goserver jiyanwang/goserver:latest
 
 ```bash
 # 1. Run HTMX Dashboard locally:
-cd services/htmx_demo
+cd htmx_demo
 go run main.go
 
 # 2. Run Go Server locally:
-cd ../services/go_server
+cd ../go_server
 go run main.go
 ```
