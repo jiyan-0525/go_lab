@@ -7,8 +7,8 @@ trigger:
       - main
   paths:
     include:
-      - go_server/**
-      - htmx_demo/**
+      - services/go_server/**
+      - services/htmx_demo/**
 
 pool:
   vmImage: ubuntu-latest
@@ -23,8 +23,8 @@ steps:
     containerRegistry: 'dockerhub-conn'
     repository: 'jiyanwang/goserver'
     command: 'buildAndPush'
-    dockerfile: 'go_server/Dockerfile'
-    buildContext: 'go_server'
+    dockerfile: 'services/go_server/Dockerfile'
+    buildContext: 'services/go_server'
     tags: |
       latest
       $(Build.BuildId)
@@ -38,8 +38,8 @@ steps:
     containerRegistry: 'dockerhub-conn'
     repository: 'jiyanwang/htmx-dashboard'
     command: 'buildAndPush'
-    dockerfile: 'htmx_demo/Dockerfile'
-    buildContext: 'htmx_demo'
+    dockerfile: 'services/htmx_demo/Dockerfile'
+    buildContext: 'services/htmx_demo'
     tags: |
       latest
       $(Build.BuildId)

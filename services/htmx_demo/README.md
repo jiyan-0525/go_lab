@@ -24,7 +24,7 @@ A lightweight, modern, and reactive web application built with **pure Go standar
 
 ### Option A: Local Run
 ```bash
-cd htmx_demo
+cd services/htmx_demo
 
 # Run with default port 8010:
 go run main.go
@@ -59,7 +59,7 @@ We use a **Multi-Stage Dockerfile** to produce an ultra-lightweight (~12MB) prod
 
 1. **Build the Docker Image**:
    ```bash
-   cd htmx_demo
+   cd services/htmx_demo
    docker build -t htmx-dashboard:latest .
    ```
 
