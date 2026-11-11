@@ -2,7 +2,7 @@
 
 run
 ```
-go mod init github.com/USERNAME/goserver
+go mod init github.com/jiyan-0525/goserver
 ```
 after replacing USERNAME and goserver with your own values.
 
@@ -85,7 +85,7 @@ GOOS=linux GOARCH=amd64 go build
 
 Rebuild the image. You'll need to use a name that corresponds to your namespace on Docker Hub. Swap out USERNAME for your Docker Hub username.
 ```
-docker build . -t USERNAME/goserver
+docker build . -t jiyanwang/goserver
 ```
 
 ```
@@ -95,15 +95,15 @@ docker tag goserver jiyanwang/goserver
 docker push jiyanwang/goserver
 ```
 ```
-docker run -p 8991:8991 jiyanwang/goserver
+docker run -p 8010:8010 jiyanwang/goserver
 
 docker push jiyanwang/goserver
 ```
 
-Remove your local USERNAME/goserver image:
+Remove your local jiyanwang/goserver image:
 
 ```
-docker image rm jiyanwawng/goserver
+docker image rm jiyanwang/goserver
 ```
 Pull it back down from Docker Hub:
 
@@ -113,5 +113,5 @@ docker pull jiyanwang/goserver
 Run it to make sure it works:
 
 ```
-docker run -p 8991:8991 jiyanwang/goserver
+docker run -p 8010:8010 jiyanwang/goserver
 ```
