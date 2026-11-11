@@ -20,7 +20,8 @@ go_lab/
 ├── README.md               # 📖 Repository documentation
 │
 ├── go_exercises/           # 📚 Core Language Exercises & Algorithms
-│   ├── go_by_Example/      # Go by Example fundamentals
+│   ├── GO-LEARNING.md      # Study notes index
+│   ├── go_basics/          # Go by Example fundamentals
 │   │   ├── hello.go        # Hello, world entry point
 │   │   ├── variables.go    # Variables, types & string indexing
 │   │   ├── control.go      # if/else control flow
@@ -30,8 +31,14 @@ go_lab/
 │   │   ├── slices.go       # Arrays, slices, append & sub-slicing
 │   │   ├── maps.go         # Key-value dictionary operations
 │   │   ├── pointers.go     # Memory addresses & pointer semantics
-│   │   └── rune.go         # Runes & Unicode string handling
-│   └── go_by_web/          # Web, cache, ORM exercises (planned)
+│   │   ├── rune.go         # Runes & Unicode string handling
+│   │   ├── struct.go       # Structs & methods
+│   │   └── error_handling.go # Error handling patterns
+│   └── go_web/             # HTTP & web exercises (in progress)
+│       └── http-base/      # net/http handlers, ServeHTTP, mini Gee framework
+│           ├── http-base1/ # Basic handlers
+│           ├── http-base2/ # Custom ServeHTTP engine
+│           └── http-base3/ # Gee framework stub (package main)
 │
 ├── go_server/              # 🌐 Backend Microservice & Docker Practices
 │   ├── main.go             # Standard library HTTP server
@@ -42,8 +49,9 @@ go_lab/
 │
 └── htmx_demo/              # 🐹 Reactive Web Application
     ├── main.go             # Go server with dynamic PORT & inline HTMX template
-    ├── Dockerfile          # Multi-stage production build (~12MB image)
+    ├── Dockerfile          # Multi-stage production build (~19MB image)
     ├── go.mod              # Go module definition
+    ├── .dockerignore       # Keeps .git and docs out of the build context
     └── README.md           # HTMX interactive guide
 ```
 
@@ -85,7 +93,7 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./azure-
 ### Key DevOps Highlights:
 - **Intelligent Triggering**: Path-based triggers avoid redundant builds when updating exercises or documentation.
 - **Hermetic Multi-Stage Builds**: Compilation happens entirely inside the Docker build container (`golang:1.22-alpine`), ensuring consistent, reproducible builds across any runner environment without pre-compiled binaries in Git.
-- **Minimal Image Footprint**: Final runtime containers run on minimal scratch/Alpine/Debian bases, keeping production images down to ~12MB.
+- **Minimal Image Footprint**: Final runtime images stay small (e.g. ~19MB for htmx_demo); go_server uses a debian:stable-slim base.
 
 ---
 
@@ -93,7 +101,7 @@ The repository uses **Azure DevOps Pipelines** ([`azure-pipelines.yml`](./azure-
 
 | Module | Purpose | Key Technologies | Docker Hub Image |
 |---|---|---|---|
-| [**`go_exercises/`**](./go_exercises) | Core language syntax, data structures, and algorithms | Variables, Control Flow, Functions, Slices, Maps, Pointers, Runes | *N/A (Library Code)* |
+| [**`go_exercises/`**](./go_exercises) | Core language syntax, data structures, algorithms, plus HTTP/net and a mini Gee-framework exercise under `go_web/` | Variables, Control Flow, Functions, Slices, Maps, Pointers, Runes, HTTP handlers, ServeHTTP | *N/A (Library Code)* |
 | [**`go_server/`**](./go_server) | Microservice HTTP server & cloud-native dynamic configuration | Go, Docker, 12-Factor App (`PORT`) | `jiyanwang/goserver` |
 | [**`htmx_demo/`**](./htmx_demo) | Modern single-page interactive UI without Node.js or frontend bundlers | Go `net/http`, HTMX, Responsive CSS | `jiyanwang/htmx-dashboard` |
 
