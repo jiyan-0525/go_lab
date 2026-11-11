@@ -17,9 +17,12 @@ func main() {
 		serverPort = envPort
 	}
 
+	// Go 1.22+ method-aware routing:
+	//   "GET /{$}"   -> only the exact root path; other methods get 405 automatically
+	//   "POST /clicked" -> only POST; GET/DELETE/etc. get 405 automatically
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handlePage)
-	mux.HandleFunc("/clicked", handleClicked)
+	mux.HandleFunc("GET /{$}", handlePage)
+	mux.HandleFunc("POST /clicked", handleClicked)
 
 	server := http.Server{
 		Addr:         ":" + serverPort,

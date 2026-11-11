@@ -55,7 +55,7 @@ docker run -d -e PORT=9000 -p 9000:9000 --name htmx-app jiyanwang/htmx-dashboard
 
 ### Option C: Build and Run Docker Locally
 
-We use a **Multi-Stage Dockerfile** to produce an ultra-lightweight (~12MB) production image:
+We use a **Multi-Stage Dockerfile** to produce an ultra-lightweight (~19MB) production image:
 
 1. **Build the Docker Image**:
    ```bash
@@ -105,8 +105,13 @@ We use a **Multi-Stage Dockerfile** to produce an ultra-lightweight (~12MB) prod
 ```text
 htmx_demo/
 ├── main.go        # HTTP server, routes, inline HTML shell & handlers
+├── go.mod         # Module definition (standard library only, no dependencies)
+├── Dockerfile     # Multi-stage build producing a ~19MB static image
+├── .dockerignore  # Keeps .git and docs out of the build context
 └── README.md      # Project documentation
 ```
+
+> **Routing (Go 1.22+)**: routes are registered with method-aware patterns — `GET /{$}` for the page (exact root only) and `POST /clicked` for the interaction. `ServeMux` answers wrong methods with `405 Method Not Allowed` on its own, so a plain visit to `/clicked` in the browser can no longer bump the counter.
 
 ---
 
@@ -118,3 +123,27 @@ For backend and systems developers, writing complex React/Vue frontend setups of
 - State resides on the server (Go).
 - The server renders HTML, which browsers natively understand.
 - You get 90% of modern SPA interactivity with 10% of the complexity.
+
+---
+
+## 🔍 Technical Comparison: React SPA vs. Go + HTMX
+
+The table below summarizes the core design trade-offs this demo is meant to illustrate.
+
+| Aspect | Typical React SPA | This Demo |
+| --- | --- | --- |
+| **Where state lives** | Frontend JavaScript (Redux, hooks, etc.) | Server side, in Go (`var clickCount`) |
+| **What travels over the wire** | JSON payloads, rendered by the client | HTML fragments, rendered by the server |
+| **Build toolchain** | npm / webpack / Vite | None — `go run main.go` just works |
+| **Dependencies** | Large JS ecosystem | Only the standard library: `net/http`, `fmt`, `time` |
+| **How the UI updates** | Client-side virtual DOM re-render | HTMX swaps a partial DOM fragment into `#result-box` |
+| **Routing & data fetching** | Separate HTTP client + state synchronization | A plain `POST /clicked` returning ready-to-use markup |
+
+### Key takeaways
+
+- **Server-owned state**: the click counter lives in a single Go variable, so there is no client-side state store to keep in sync.
+- **HTML as the API contract**: handlers return HTML snippets (`<div class="active-card">…</div>`) instead of JSON, and the browser already knows how to display them.
+- **No build pipeline**: a single Go binary serves the page, the styles, and the interaction logic.
+- **Progressive enhancement**: HTMX is loaded from a CDN, so the application itself is a single `.go` file — everything else in the directory is packaging (module file, Dockerfile, docs).
+
+> ⚠️ **Demo, not production code**: `clickCount` is a plain global variable, which is not safe under concurrent requests or across multiple replicas, and there is no authentication or persistence.
