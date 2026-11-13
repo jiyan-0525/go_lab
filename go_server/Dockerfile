@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /app/goserver .
 # ==========================================
 # Stage 2: Minimal Runtime Image
 # ==========================================
-FROM debian:stable-slim
+FROM alpine:3.24.4
 
 WORKDIR /app
 

@@ -22,7 +22,7 @@ go_lab/
 ├── go_exercises/           # 📚 Core Language Exercises & Algorithms
 │   ├── GO-LEARNING.md      # Study notes index
 │   ├── go_basics/          # Go by Example fundamentals
-│   │   └── ...             # Core language exercises (hello, variables, control flow, functions, slices, maps, pointers, runes, structs, error handling)
+│   │   └── ...             # Core language exercises (hello, variables ...)
 │   └── go_web/             # HTTP & web exercises (in progress)
 │       └── http-base/      # net/http handlers, ServeHTTP, mini Gee framework
 │           ├── http-base1/ # Basic handlers
